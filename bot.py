@@ -7,7 +7,11 @@ bot=telebot.TeleBot(token)
 
 @bot.message_handler(commands=["start"])
 def start_message(message):
-  bot.send_message(message.chat.id,"Это - небольшой бот написанный @nekker37")
+  bot.send_message(message.chat.id,
+  """
+  Это - небольшой бот написанный @nekker37
+  Сюда можно отправлять фото, которые потом весьма успешно сохранятся на сервере.
+  """)
 
 
 @bot.message_handler(content_types=["text"])
@@ -29,6 +33,7 @@ def photo_save(message):
     downloaded_file = bot.download_file(file_info.file_path)
     with open(path,'wb') as new_file:
         new_file.write(downloaded_file)
+    bot.send_message(message.chat.id, 'Фото успешно сохранено.')
 
 
 bot.infinity_polling()
