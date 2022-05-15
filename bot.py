@@ -36,4 +36,17 @@ def photo_save(message):
     bot.send_message(message.chat.id, 'Фото успешно сохранено.')
 
 
+@bot.message_handler(content_types=["document"])
+def photo_save(message):
+    id = message.document.file_id
+    print("Скачан файл с ID:",id)
+    file_info = bot.get_file(id)
+    path = "SavedDocument/" + message.document.file_name
+    downloaded_file = bot.download_file(file_info.file_path)
+    with open(path,'wb') as new_file:
+        new_file.write(downloaded_file)
+    bot.send_message(message.chat.id, 'Документ успешно сохранён.')
+
+
+
 bot.infinity_polling()
