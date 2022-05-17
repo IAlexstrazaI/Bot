@@ -14,6 +14,8 @@ def start_message(message):
   """)
 
 
+
+
 @bot.message_handler(content_types=["text"])
 def start_message(message):
     print(message.text)
@@ -22,6 +24,8 @@ def start_message(message):
         bot.send_photo(message.chat.id,photo,caption="Нагаторо detected")
     if (message.text.lower().find("лоли") != -1):
         bot.send_photo(message.chat.id,'https://i1.sndcdn.com/artworks-000588837944-wshxw2-t500x500.jpg',caption="Лоли detected")
+    if (message.text.lower().find("лабы") != -1):
+        bot.send_photo(message.chat.id,open("laby.jpg","rb"),caption="Вот мои ебучие лабы на момент 17/5/22 11:15")
     else:bot.send_message(message.chat.id, message.text)
 
 @bot.message_handler(content_types=["photo"])
@@ -46,6 +50,7 @@ def photo_save(message):
     with open(path,'wb') as new_file:
         new_file.write(downloaded_file)
     bot.send_message(message.chat.id, 'Документ успешно сохранён.')
+
 
 
 
